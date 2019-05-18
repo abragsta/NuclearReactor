@@ -1,4 +1,5 @@
-﻿using NuclearReactor.Core.Contracts;
+﻿using System.Threading.Tasks;
+using NuclearReactor.Core.Contracts;
 using NuclearReactor.Core.Enums;
 
 namespace NuclearReactor.Core
@@ -19,6 +20,12 @@ namespace NuclearReactor.Core
             if (ValveState == ValveState.Closed)
             {
                 ValveState = ValveState.Opening;
+
+                Task.Delay(2000).ContinueWith(t =>
+                {
+                    ValveState = ValveState.Open;
+                    _pressureContainer.SetState(ValveState.Open);
+                });
             }
         }
 

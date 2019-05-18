@@ -32,9 +32,10 @@ namespace NuclearReactor.Core.UnitTests
 
             valveControl.Open();
 
-            Thread.Sleep(2000);
+            Thread.Sleep(2100);
 
             Assert.Equal(ValveState.Open, valveControl.ValveState);
+            _pressureContainer.Received().SetState(ValveState.Open);
         }
 
         private ValveControl GetValveControl(ValveState valveState)
