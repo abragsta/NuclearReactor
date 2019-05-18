@@ -21,6 +21,11 @@ namespace NuclearReactor.Core
             {
                 _valveControl.Open();
             }
+
+            if (sensorValue < 0.5f)
+            {
+                _valveControl.Close();
+            }
         }
     }
 }
