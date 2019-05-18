@@ -38,6 +38,29 @@ namespace NuclearReactor.Core.UnitTests
             _pressureContainer.Received().SetState(ValveState.Open);
         }
 
+        [Fact]
+        public void Close_ValveIsOpen_ValveIsClosing()
+        {
+            var valveControl = GetValveControl(ValveState.Open);
+
+            valveControl.Close();
+
+            Assert.Equal(ValveState.Closing, valveControl.ValveState);
+        }
+
+        [Fact]
+        public void Close_ValveIsOpen_ValveIsClosedAfter2Seconds()
+        {
+            var valveControl = GetValveControl(ValveState.Open);
+
+            valveControl.Close();
+
+            Thread.Sleep(2100);
+
+            Assert.Equal(ValveState.Closed, valveControl.ValveState);
+            _pressureContainer.Received().SetState(ValveState.Closed);
+        }
+
         private ValveControl GetValveControl(ValveState valveState)
         {
             return new ValveControl(_pressureContainer, valveState);
