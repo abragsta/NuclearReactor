@@ -89,7 +89,10 @@ namespace NuclearReactor.Core.UnitTests
 
         private ValveControl GetValveControl(ValveState valveState)
         {
-            return new ValveControl(_pressureContainer, valveState);
+
+            _pressureContainer.ValveState.Returns(valveState);
+
+            return new ValveControl(_pressureContainer);
         }
     }
 }

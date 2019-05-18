@@ -5,7 +5,8 @@ namespace NuclearReactor.Core
 {
     public class NuclearReactor : IPressureContainer
     {
-        public float Pressure { get; set; }
+        public float Pressure { get; private set; }
+        public ValveState ValveState { get; private set; }
 
         public NuclearReactor()
         {
@@ -18,11 +19,6 @@ namespace NuclearReactor.Core
         }
 
         public void UpdatePressure()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public float GetPressureValue()
         {
             throw new System.NotImplementedException();
         }

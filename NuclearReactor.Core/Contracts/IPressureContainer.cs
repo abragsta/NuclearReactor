@@ -6,6 +6,7 @@ namespace NuclearReactor.Core.Contracts
     {
         void SetState(ValveState valveState);
         void UpdatePressure();
-        float GetPressureValue();
+        float Pressure { get; }
+        ValveState ValveState { get; }
     }
 }
