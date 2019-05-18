@@ -36,5 +36,16 @@ namespace NuclearReactor.Core.UnitTests
 
             _valveControl.Received().Close();
         }
+
+        [Fact]
+        public void InitiateControl_PressureIsOptimal_NoActionIsExecuted()
+        {
+            _pressureSensor.GetValue().Returns(0.65f);
+
+            _controlUnit.InitiateControl();
+
+            _valveControl.DidNotReceive().Close();
+            _valveControl.DidNotReceive().Open();
+        }
     }
 }
