@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NuclearReactor.Core;
+using NuclearReactor.Core.Contracts;
+using NuclearReactor.Core.HostedServices;
 
 namespace NuclearReactor.WebApi
 {
@@ -18,6 +21,13 @@ namespace NuclearReactor.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddHostedService<ControlTimerService>();
+
+            services.AddTransient<IPressureSensor, PressureSensor>();
+            services.AddTransient<IPressureContainer, Core.NuclearReactor>();
+            services.AddTransient<IValveControl, ValveControl>();
+            services.AddTransient<IControlUnit, ControlUnit>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
