@@ -16,7 +16,7 @@ namespace NuclearReactor.Core
 
         public void SetState(ValveState valveState)
         {
-            throw new System.NotImplementedException();
+            ValveState = valveState;
         }
 
         public void UpdatePressure()
