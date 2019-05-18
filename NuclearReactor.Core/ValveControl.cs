@@ -31,7 +31,16 @@ namespace NuclearReactor.Core
 
         public void Close()
         {
-            throw new System.NotImplementedException();
+            if (ValveState == ValveState.Open)
+            {
+                ValveState = ValveState.Closing;
+
+                Task.Delay(2000).ContinueWith(t =>
+                {
+                    ValveState = ValveState.Closed;
+                    _pressureContainer.SetState(ValveState.Closed);
+                });
+            }
         }
     }
 }
