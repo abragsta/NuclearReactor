@@ -21,7 +21,10 @@ namespace NuclearReactor.Core
 
         public void UpdatePressure()
         {
-            throw new System.NotImplementedException();
+            if (PressureContainerState == PressureContainerState.Closed)
+            {
+                Pressure += 0.03f;
+            }
         }
     }
 }
