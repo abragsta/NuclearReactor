@@ -13,7 +13,7 @@ namespace NuclearReactor.Core
 
         public float GetValue()
         {
-            throw new System.NotImplementedException();
+            return _pressureContainer.Pressure;
         }
     }
 }
