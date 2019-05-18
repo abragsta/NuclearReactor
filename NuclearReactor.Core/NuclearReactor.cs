@@ -11,6 +11,7 @@ namespace NuclearReactor.Core
         public NuclearReactor()
         {
             Pressure = 0.5f;
+            ValveState = ValveState.Closed;
         }
 
         public void SetState(ValveState valveState)
