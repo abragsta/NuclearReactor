@@ -6,7 +6,7 @@ namespace NuclearReactor.Core
     public class ValveControl : IValveControl
     {
         private readonly IPressureContainer _pressureContainer;
-        public ValveState ValveState { get; }
+        public ValveState ValveState { get; private set; }
 
         public ValveControl(IPressureContainer pressureContainer, ValveState valveState)
         {
@@ -16,7 +16,10 @@ namespace NuclearReactor.Core
 
         public void Open()
         {
-            throw new System.NotImplementedException();
+            if (ValveState == ValveState.Closed)
+            {
+                ValveState = ValveState.Opening;
+            }
         }
 
         public void Close()
