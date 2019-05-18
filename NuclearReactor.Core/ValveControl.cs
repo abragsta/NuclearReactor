@@ -6,12 +6,12 @@ namespace NuclearReactor.Core
     public class ValveControl : IValveControl
     {
         private readonly IPressureContainer _pressureContainer;
-        private readonly ValveState valveState;
+        public ValveState ValveState { get; }
 
         public ValveControl(IPressureContainer pressureContainer, ValveState valveState)
         {
             _pressureContainer = pressureContainer;
-            this.valveState = valveState;
+            this.ValveState = valveState;
         }
 
         public void Open()
