@@ -10,12 +10,17 @@ namespace NuclearReactor.Core.HostedServices
     public class ControlTimerService : IHostedService, IDisposable
     {
         private readonly IControlUnit _controlUnit;
+        private readonly IPressureContainer _pressureContainer;
         private readonly ILogger<ControlTimerService> _logger;
         private Timer _timer;
 
-        public ControlTimerService(IControlUnit controlUnit, ILogger<ControlTimerService> logger)
+        public ControlTimerService(
+            IControlUnit controlUnit, 
+            IPressureContainer pressureContainer,
+            ILogger<ControlTimerService> logger)
         {
             _controlUnit = controlUnit;
+            _pressureContainer = pressureContainer;
             _logger = logger;
         }
 
@@ -32,6 +37,7 @@ namespace NuclearReactor.Core.HostedServices
         private void DoWork(object state)
         {
             _controlUnit.InitiateControl();
+            _pressureContainer.UpdatePressure();
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
