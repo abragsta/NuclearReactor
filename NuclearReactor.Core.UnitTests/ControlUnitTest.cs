@@ -18,13 +18,13 @@ namespace NuclearReactor.Core.UnitTests
         }
 
         [Fact]
-        public void InitiateControl_PressureIsAbove75_ValveIsClosed()
+        public void InitiateControl_PressureIsAbove75_ValveIsOpened()
         {
             _pressureSensor.GetValue().Returns(0.76f);
 
             _controlUnit.InitiateControl();
 
-            _valveControl.Received().Close();
+            _valveControl.Received().Open();
         }
     }
 }
