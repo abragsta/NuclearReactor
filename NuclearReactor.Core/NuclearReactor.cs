@@ -25,6 +25,11 @@ namespace NuclearReactor.Core
             {
                 Pressure += 0.03f;
             }
+
+            if (PressureContainerState == PressureContainerState.Open)
+            {
+                Pressure -= 0.06f;
+            }
         }
     }
 }
