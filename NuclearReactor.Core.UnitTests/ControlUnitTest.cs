@@ -26,5 +26,15 @@ namespace NuclearReactor.Core.UnitTests
 
             _valveControl.Received().Open();
         }
+
+        [Fact]
+        public void InitiateControl_PressureIsBelow50_ValveIsClosed()
+        {
+            _pressureSensor.GetValue().Returns(0.49f);
+
+            _controlUnit.InitiateControl();
+
+            _valveControl.Received().Close();
+        }
     }
 }
