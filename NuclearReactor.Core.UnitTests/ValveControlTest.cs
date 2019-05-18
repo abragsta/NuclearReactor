@@ -38,6 +38,19 @@ namespace NuclearReactor.Core.UnitTests
             _pressureContainer.Received().SetState(ValveState.Open);
         }
 
+        [Theory]
+        [InlineData(ValveState.Open)]
+        [InlineData(ValveState.Opening)]
+        [InlineData(ValveState.Closing)]
+        public void Open_ValveStateIsNotClosed_ValveStateIsUnchanged(ValveState valveState)
+        {
+            var valveControl = GetValveControl(valveState);
+
+            valveControl.Open();
+
+            Assert.Equal(valveState, valveControl.ValveState);
+        }
+
         [Fact]
         public void Close_ValveIsOpen_ValveIsClosing()
         {
@@ -59,6 +72,19 @@ namespace NuclearReactor.Core.UnitTests
 
             Assert.Equal(ValveState.Closed, valveControl.ValveState);
             _pressureContainer.Received().SetState(ValveState.Closed);
+        }
+
+        [Theory]
+        [InlineData(ValveState.Closed)]
+        [InlineData(ValveState.Opening)]
+        [InlineData(ValveState.Closing)]
+        public void Close_ValveStateIsNotOpen_ValveStateIsUnchanged(ValveState valveState)
+        {
+            var valveControl = GetValveControl(valveState);
+
+            valveControl.Close();
+
+            Assert.Equal(valveState, valveControl.ValveState);
         }
 
         private ValveControl GetValveControl(ValveState valveState)
