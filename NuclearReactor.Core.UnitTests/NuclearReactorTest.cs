@@ -31,5 +31,17 @@ namespace NuclearReactor.Core.UnitTests
 
             Assert.Equal(expectedPressure, _nuclearReactor.Pressure);
         }
+
+        [Fact]
+        public void UpdatePressure_PressureContainerStateIsOpen_PressureIsDecreasedBy6Percent()
+        {
+            var currentPressure = _nuclearReactor.Pressure;
+            var expectedPressure = currentPressure - 0.06f;
+
+            _nuclearReactor.SetState(PressureContainerState.Open);
+            _nuclearReactor.UpdatePressure();
+
+            Assert.Equal(expectedPressure, _nuclearReactor.Pressure);
+        }
     }
 }
