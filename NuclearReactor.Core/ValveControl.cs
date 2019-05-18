@@ -9,10 +9,11 @@ namespace NuclearReactor.Core
         private readonly IPressureContainer _pressureContainer;
         public ValveState ValveState { get; private set; }
 
-        public ValveControl(IPressureContainer pressureContainer, ValveState valveState)
+        public ValveControl(IPressureContainer pressureContainer)
         {
             _pressureContainer = pressureContainer;
-            this.ValveState = valveState;
+            this.ValveState = _pressureContainer.PressureContainerState == PressureContainerState.Open ? 
+                ValveState.Open : ValveState.Closed;
         }
 
         public void Open()

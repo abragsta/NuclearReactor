@@ -38,17 +38,14 @@ namespace NuclearReactor.Core.UnitTests
             _pressureContainer.Received().SetState(PressureContainerState.Open);
         }
 
-        [Theory]
-        [InlineData(ValveState.Open)]
-        [InlineData(ValveState.Opening)]
-        [InlineData(ValveState.Closing)]
-        public void Open_ValveStateIsNotClosed_ValveStateIsUnchanged(ValveState valveState)
+        [Fact]
+        public void Open_ValveStateIsOpen_ValveStateIsUnchanged()
         {
-            var valveControl = GetValveControl(valveState);
+            var valveControl = GetValveControl(ValveState.Open);
 
             valveControl.Open();
 
-            Assert.Equal(valveState, valveControl.ValveState);
+            Assert.Equal(ValveState.Open, valveControl.ValveState);
         }
 
         [Fact]
@@ -74,17 +71,14 @@ namespace NuclearReactor.Core.UnitTests
             _pressureContainer.Received().SetState(PressureContainerState.Closed);
         }
 
-        [Theory]
-        [InlineData(ValveState.Closed)]
-        [InlineData(ValveState.Opening)]
-        [InlineData(ValveState.Closing)]
-        public void Close_ValveStateIsNotOpen_ValveStateIsUnchanged(ValveState valveState)
+        [Fact]
+        public void Close_ValveStateIsClosed_ValveStateIsUnchanged()
         {
-            var valveControl = GetValveControl(valveState);
+            var valveControl = GetValveControl(ValveState.Closed);
 
             valveControl.Close();
 
-            Assert.Equal(valveState, valveControl.ValveState);
+            Assert.Equal(ValveState.Closed, valveControl.ValveState);
         }
 
         private ValveControl GetValveControl(ValveState valveState)
@@ -95,7 +89,7 @@ namespace NuclearReactor.Core.UnitTests
 
             _pressureContainer.PressureContainerState.Returns(pressureContainerState);
 
-            return new ValveControl(_pressureContainer, valveState);
+            return new ValveControl(_pressureContainer);
         }
     }
 }
