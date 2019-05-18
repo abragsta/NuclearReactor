@@ -15,7 +15,12 @@ namespace NuclearReactor.Core
 
         public void InitiateControl()
         {
-            throw new System.NotImplementedException();
+            var sensorValue = _pressureSensor.GetValue();
+
+            if (sensorValue > 0.75f)
+            {
+                _valveControl.Close();
+            }
         }
     }
 }

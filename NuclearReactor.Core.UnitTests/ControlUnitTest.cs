@@ -1,5 +1,4 @@
 ﻿using NSubstitute;
-using NSubstitute.ReceivedExtensions;
 using NuclearReactor.Core.Contracts;
 using Xunit;
 
@@ -21,7 +20,7 @@ namespace NuclearReactor.Core.UnitTests
         [Fact]
         public void InitiateControl_PressureIsAbove75_ValveIsClosed()
         {
-            _pressureSensor.GetValue().Returns(76);
+            _pressureSensor.GetValue().Returns(0.76f);
 
             _controlUnit.InitiateControl();
 
