@@ -6,17 +6,17 @@ namespace NuclearReactor.Core
     public class NuclearReactor : IPressureContainer
     {
         public float Pressure { get; private set; }
-        public ValveState ValveState { get; private set; }
+        public PressureContainerState PressureContainerState { get; private set; }
 
         public NuclearReactor()
         {
             Pressure = 0.5f;
-            ValveState = ValveState.Closed;
+            PressureContainerState = PressureContainerState.Closed;
         }
 
-        public void SetState(ValveState valveState)
+        public void SetState(PressureContainerState pressureContainerState)
         {
-            ValveState = valveState;
+            PressureContainerState = pressureContainerState;
         }
 
         public void UpdatePressure()

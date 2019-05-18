@@ -35,7 +35,7 @@ namespace NuclearReactor.Core.UnitTests
             Thread.Sleep(2100);
 
             Assert.Equal(ValveState.Open, valveControl.ValveState);
-            _pressureContainer.Received().SetState(ValveState.Open);
+            _pressureContainer.Received().SetState(PressureContainerState.Open);
         }
 
         [Theory]
@@ -71,7 +71,7 @@ namespace NuclearReactor.Core.UnitTests
             Thread.Sleep(2100);
 
             Assert.Equal(ValveState.Closed, valveControl.ValveState);
-            _pressureContainer.Received().SetState(ValveState.Closed);
+            _pressureContainer.Received().SetState(PressureContainerState.Closed);
         }
 
         [Theory]
@@ -89,10 +89,13 @@ namespace NuclearReactor.Core.UnitTests
 
         private ValveControl GetValveControl(ValveState valveState)
         {
+            var pressureContainerState = valveState == ValveState.Closed || valveState == ValveState.Opening
+                ? PressureContainerState.Closed
+                : PressureContainerState.Open;
 
-            _pressureContainer.ValveState.Returns(valveState);
+            _pressureContainer.PressureContainerState.Returns(pressureContainerState);
 
-            return new ValveControl(_pressureContainer);
+            return new ValveControl(_pressureContainer, valveState);
         }
     }
 }

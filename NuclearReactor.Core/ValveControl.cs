@@ -9,10 +9,10 @@ namespace NuclearReactor.Core
         private readonly IPressureContainer _pressureContainer;
         public ValveState ValveState { get; private set; }
 
-        public ValveControl(IPressureContainer pressureContainer)
+        public ValveControl(IPressureContainer pressureContainer, ValveState valveState)
         {
             _pressureContainer = pressureContainer;
-            this.ValveState = pressureContainer.ValveState;
+            this.ValveState = valveState;
         }
 
         public void Open()
@@ -24,7 +24,7 @@ namespace NuclearReactor.Core
                 Task.Delay(2000).ContinueWith(t =>
                 {
                     ValveState = ValveState.Open;
-                    _pressureContainer.SetState(ValveState.Open);
+                    _pressureContainer.SetState(PressureContainerState.Open);
                 });
             }
         }
@@ -38,7 +38,7 @@ namespace NuclearReactor.Core
                 Task.Delay(2000).ContinueWith(t =>
                 {
                     ValveState = ValveState.Closed;
-                    _pressureContainer.SetState(ValveState.Closed);
+                    _pressureContainer.SetState(PressureContainerState.Closed);
                 });
             }
         }

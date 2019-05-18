@@ -15,9 +15,9 @@ namespace NuclearReactor.Core.UnitTests
         [Fact]
         public void SetState_NewState_StateIsUpdated()
         {
-            _nuclearReactor.SetState(ValveState.Open);
+            _nuclearReactor.SetState(PressureContainerState.Open);
 
-            Assert.Equal(ValveState.Open, _nuclearReactor.ValveState);
+            Assert.Equal(PressureContainerState.Open, _nuclearReactor.PressureContainerState);
         }
     }
 }

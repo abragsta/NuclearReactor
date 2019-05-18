@@ -4,9 +4,9 @@ namespace NuclearReactor.Core.Contracts
 {
     public interface IPressureContainer
     {
-        void SetState(ValveState valveState);
+        void SetState(PressureContainerState pressureContainerState);
         void UpdatePressure();
         float Pressure { get; }
-        ValveState ValveState { get; }
+        PressureContainerState PressureContainerState { get; }
     }
 }
