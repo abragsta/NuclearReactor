@@ -8,6 +8,9 @@ namespace NuclearReactor.Core
         public float Pressure { get; private set; }
         public PressureContainerState PressureContainerState { get; private set; }
 
+        private const float ClosedValveIncrementValue = 0.03f;
+        private const float OpenValveDecrementValue = 0.06f;
+
         public NuclearReactor()
         {
             Pressure = 0.5f;
@@ -23,12 +26,12 @@ namespace NuclearReactor.Core
         {
             if (PressureContainerState == PressureContainerState.Closed)
             {
-                Pressure += 0.03f;
+                Pressure += ClosedValveIncrementValue;
             }
 
             if (PressureContainerState == PressureContainerState.Open)
             {
-                Pressure -= 0.06f;
+                Pressure -= OpenValveDecrementValue;
             }
         }
     }

@@ -7,6 +7,9 @@ namespace NuclearReactor.Core
         private readonly IValveControl _valveControl;
         private readonly IPressureSensor _pressureSensor;
 
+        private const float UpperLimit = 0.75f;
+        private const float LowerLimit = 0.50f;
+
         public ControlUnit(IValveControl valveControl, IPressureSensor pressureSensor)
         {
             _valveControl = valveControl;
@@ -17,12 +20,12 @@ namespace NuclearReactor.Core
         {
             var sensorValue = _pressureSensor.GetValue();
 
-            if (sensorValue > 0.75f)
+            if (sensorValue > UpperLimit)
             {
                 _valveControl.Open();
             }
 
-            if (sensorValue < 0.5f)
+            if (sensorValue < LowerLimit)
             {
                 _valveControl.Close();
             }

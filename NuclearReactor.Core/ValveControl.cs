@@ -9,6 +9,8 @@ namespace NuclearReactor.Core
         private readonly IPressureContainer _pressureContainer;
         public ValveState ValveState { get; private set; }
 
+        private const int OpenCloseDelayInMs = 2000;
+
         public ValveControl(IPressureContainer pressureContainer)
         {
             _pressureContainer = pressureContainer;
@@ -22,7 +24,7 @@ namespace NuclearReactor.Core
             {
                 ValveState = ValveState.Opening;
 
-                Task.Delay(2000).ContinueWith(t =>
+                Task.Delay(OpenCloseDelayInMs).ContinueWith(t =>
                 {
                     ValveState = ValveState.Open;
                     _pressureContainer.SetState(PressureContainerState.Open);
@@ -36,7 +38,7 @@ namespace NuclearReactor.Core
             {
                 ValveState = ValveState.Closing;
 
-                Task.Delay(2000).ContinueWith(t =>
+                Task.Delay(OpenCloseDelayInMs).ContinueWith(t =>
                 {
                     ValveState = ValveState.Closed;
                     _pressureContainer.SetState(PressureContainerState.Closed);
