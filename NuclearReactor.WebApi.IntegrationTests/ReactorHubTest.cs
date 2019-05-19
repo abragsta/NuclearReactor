@@ -19,17 +19,23 @@ namespace NuclearReactor.WebApi.IntegrationTests
 
             var connection = GetTestServerConnection(config);
 
+            var pressureUpdateWasCalled = false;
+
             connection.On<string>("pressureUpdate", result =>
             {
                 var pressure = float.Parse(result, CultureInfo.InvariantCulture.NumberFormat);
 
                 Assert.True(pressure > 0f);
                 Assert.True(pressure < 0.9f);
+
+                pressureUpdateWasCalled = true;
             });
 
             await connection.StartAsync();
 
             Thread.Sleep(15000);
+
+            Assert.True(pressureUpdateWasCalled);
         }
 
         private static HubConnection GetTestServerConnection(IConfigurationRoot config)
